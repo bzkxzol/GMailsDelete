@@ -10,8 +10,8 @@ import java.util.concurrent.TimeUnit;
 public class ChromeSettings {
 
     protected WebDriver driver;
-    protected  String userEmail = "dimahpfsoft@gmail.com";
-    protected  String userPassword = "qweRty123";
+    protected  String userEmail = "mail";
+    protected  String userPassword = "password";
 
     @BeforeTest
     public void setUp(){
@@ -23,8 +23,8 @@ public class ChromeSettings {
 
     }
 
-//    @AfterTest
-//    public void tearDown(){
-//        driver.close();
-//    }
+    @AfterTest
+    public void tearDown(){
+        driver.close();
+    }
 }

@@ -4,8 +4,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
+
 
 public class LoginPage {
     private WebDriver driver;
@@ -22,11 +21,11 @@ public class LoginPage {
     By moreButtonLocator = By.cssSelector(".CJ");
     By allMailsLocator = By.xpath("//a[@title='Вся почта']");
 
-    By selectAllCheckboxLocator = By.xpath("//*[@class='T-I J-J5-Ji T-Pm T-I-ax7 L3 J-JN-M-I']/div[1]/span/div");
-    By deleteButtonLocator = By.xpath("//*[@id=\":5\"]/div[2]/div[1]/div[1]/div/div/div[2]/div[3]/div/div");
-    By submitDeleteLocator = By.xpath("/html/body/div[19]/div[3]/button[1]");
+    By selectAllCheckboxLocator = By.xpath(".//*[@gh='tm']/div/div/div/div/div/div/div/span[@role='checkbox']");
+    By deleteButtonLocator = By.xpath(".//*[@class='aeH']/div[2]/div[1]/div[1]/div/div/div[2]/div[3]");
+    By submitDeleteLocator = By.xpath("/html/body/div[@role=\"alertdialog\"]/div[3]/button[1]");
 
-    By numberOfMailsLocator = By.xpath(".//*[@class=\"J-J5-Ji amH J-JN-I\"]/span/span[2]");
+    By numberOfMailsLocator = By.xpath(".//*[@gh='tm']/div/div[2]/div/span/div/span/span[2]");
 
 
     public void typeEmail(String email) {
@@ -85,13 +84,17 @@ public class LoginPage {
     }
 
     public void deleteAllMails() throws InterruptedException {
-        WebElement numberOfMails = driver.findElement(numberOfMailsLocator);
-        while (!numberOfMails.getText().equals("0")) {
+
+        while (isElementPresent(numberOfMailsLocator)) {
+            Thread.sleep(1000);
             selectAllCheckBoxClick();
             deleteButtonClick();
             submitDeleteClick();
-            Thread.sleep(1000);
         }
+    }
+
+    public boolean isElementPresent(By selector){
+        return driver.findElements(selector).size() > 0;
     }
 }
 

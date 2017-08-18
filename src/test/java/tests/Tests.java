@@ -18,5 +18,7 @@ public class Tests  extends ChromeSettings{
         loginpage.allMailsClick();
         loginpage.deleteAllMails();
 
+        System.out.println("Test passed!");
+
     }
 }
