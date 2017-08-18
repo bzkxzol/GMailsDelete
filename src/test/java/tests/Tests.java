@@ -13,5 +13,10 @@ public class Tests  extends ChromeSettings{
         loginpage.nextButtonLoginClick();
         loginpage.typePassword(userPassword);
         loginpage.nextButtonPasswordClick();
+
+        loginpage.moreButtonClick();
+        loginpage.allMailsClick();
+        loginpage.deleteAllMails();
+
     }
 }
