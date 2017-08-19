@@ -19,11 +19,13 @@ public class LoginPage {
     By nextButtonPasswordLocator = By.cssSelector("#passwordNext > content > span");
 
     By moreButtonLocator = By.cssSelector(".CJ");
-    By allMailsLocator = By.xpath("//a[@title='Вся почта']");
+    By allMailsButtonLocator = By.xpath("//a[@href='https://mail.google.com/mail/u/0/#all']");
+    By binButtonLocator = By.xpath("//a[@href='https://mail.google.com/mail/u/0/#trash']");
 
     By selectAllCheckboxLocator = By.xpath(".//*[@gh='tm']/div/div/div/div/div/div/div/span[@role='checkbox']");
     By deleteButtonLocator = By.xpath(".//*[@class='aeH']/div[2]/div[1]/div[1]/div/div/div[2]/div[3]");
-    By submitDeleteLocator = By.xpath("/html/body/div[@role=\"alertdialog\"]/div[3]/button[1]");
+    By submitDeleteLocator = By.xpath("/html/body/div[@role='alertdialog']/div[3]/button[1]");
+    By deleteFromBinButtonLocator  = By.xpath(".//*[@gh='mtb']/div/div/div[2]/div/div");
 
     By numberOfMailsLocator = By.xpath(".//*[@gh='tm']/div/div[2]/div/span/div/span/span[2]");
 
@@ -61,16 +63,27 @@ public class LoginPage {
     }
 
     public void allMailsClick() throws InterruptedException {
-        WebElement allMails = driver.findElement(allMailsLocator);
+        WebElement allMails = driver.findElement(allMailsButtonLocator);
         allMails.click();
         Thread.sleep(500);
+    }
+
+    public void binButtonClick() throws InterruptedException {
+        WebElement binButton = driver.findElement(binButtonLocator);
+        binButton.click();
+        Thread.sleep(500);
+    }
+
+    public void deleteFromBinButtonClick(){
+        WebElement deleteFromBinButton = driver.findElement(deleteFromBinButtonLocator);
+        deleteFromBinButton.click();
     }
 
     public void selectAllCheckBoxClick() throws InterruptedException {
         WebElement selectAllCheckbox = driver.findElement(selectAllCheckboxLocator);
         Actions action = new Actions(driver);
         action.moveToElement(selectAllCheckbox).click().build().perform();
-        Thread.sleep(100);
+        Thread.sleep(200);
     }
 
     public void deleteButtonClick() {
@@ -86,10 +99,19 @@ public class LoginPage {
     public void deleteAllMails() throws InterruptedException {
 
         while (isElementPresent(numberOfMailsLocator)) {
-            Thread.sleep(1000);
             selectAllCheckBoxClick();
             deleteButtonClick();
             submitDeleteClick();
+            Thread.sleep(1500);
+        }
+    }
+
+    public void deleteMailsFromBin() throws InterruptedException {
+
+        while (isElementPresent(numberOfMailsLocator)){
+            selectAllCheckBoxClick();
+            deleteFromBinButtonClick();
+            Thread.sleep(2000);
         }
     }
 
